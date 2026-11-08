@@ -1,6 +1,8 @@
 #pragma once
 #include "encounter.h"
 #include <cmath>
+#include <string>
+#include <vector>
 
 class MinHeap{
 private:
@@ -10,15 +12,13 @@ private:
     };
 
     static const int NONE = -1;
-    static const double EPS;
+    static constexpr double EPS = 1e-9; //moved definition to inside the class so it doesnt break
 
     std::vector<Node> data;
     int totalSightings = 0;
 
     static void swapNodes(Node& a, Node& b){
-        double temp = a.distance;
-        a.distance = b.distance;
-        b.distance = temp;
+        std::swap(a.distance,b.distance);
         a.cities.swap(b.cities);
     }
 
@@ -50,6 +50,15 @@ private:
             }
         }
     }
+    City* cityInNode(int i, const std::string& name, const std::string& state){ //made passing in as const
+        for (City& c : data[i].cities){
+            if (c.name == name && c.state == state) {
+                return &c;
+            }
+        }
+        return nullptr;
+
+    }
 
 public:
 
@@ -58,48 +67,62 @@ public:
 
         int i = findNode(0, distance);
         if (i != NONE){
-            data[i].cities.push_back(city);
+            City* exists = cityInNode(i,city.name,city.state);
+            if (exists){
+                exists->encounters.insert(exists->encounters.end(), city.encounters.begin(), city.encounters.end());
+            } else {
+                data[i].cities.push_back(city);
+            }
             return;
         }
-        data.push_back(Node());
-        Node& node = data[data.size()-1];
-        node.distance = distance;
-        node.cities.push_back(city);
+        data.push_back(Node{distance, {city}});
         siftUp((int)data.size()-1);
     }
 
-    City* search(std::string& name, std::string& state, double distance){
+    City* search(const std::string& name, const std::string& state, double distance){ //made passing in as const
         int i = findNode(0, distance);
         if (i == NONE){
             return nullptr;
         }
-        for (int j = 0; j < (int)data[i].cities.size(); j++){
-            City& c = data[i].cities[j];
-            if (c.name == name && c.state == state){
-                return &c;
-            }
-        }
-        return nullptr;
+        return cityInNode(i, name, state);
     }
 
-    bool reportSighting(std::string& name, std::string& state, double distance, Encounter& e){
+    bool reportSighting(const std::string& name,const std::string& state, double distance, const Encounter& e){ //made passing in as const
         City* c = search(name, state, distance);
-        if (!c){
-            return false;
+        if (c) {
+            c->encounters.push_back(e);
+            totalSightings++;
+            return true;
         }
-        c->encounters.push_back(e);
-        totalSightings++;
-        return true;
+        City newCity;
+        newCity.name = name;
+        newCity.state = state;
+        newCity.encounters.push_back(e);
+        insert(newCity, distance);
+        return false;
+
     }
 
-    double probability(std::string& name, std::string state, double distance){
+    double probability(const std::string& name, const std::string state, double distance){ //made passing in as const
         City* c = search(name, state, distance);
         if (!c || totalSightings == 0){
             return 0.0;
         }
         return 100.0 * (double)c->encounters.size() / (double)totalSightings;
     }
-};
 
-//EPS definition
-const double MinHeap::EPS = 1e-9;
+    //helpers (mostly to help with the UI connection if needed)
+    int nodeCount(){
+        return (int)data.size();
+    }
+    int total(){
+        return totalSightings;
+    }
+    double rootDistance(){
+        if (data.empty()){
+            return 0.0;
+        } else {
+            return data[0].distance;
+        }
+    }
+};
