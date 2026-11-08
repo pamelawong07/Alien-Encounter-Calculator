@@ -41,7 +41,7 @@ void Frontend_functions::getData(){
     //vector<string> received_mindata = {"cba", "peepy"};     //instead of direct declaration when possible
     QueryResult received_mindata = backend.queryHeap(curr_city, selected_state);
 
-    splaydata = received_splaydata;
+    splaydata = received_mindata.descriptions;
     mindata = received_mindata.descriptions;
     splaytime = 0;
     mintime = float(received_mindata.seconds);
