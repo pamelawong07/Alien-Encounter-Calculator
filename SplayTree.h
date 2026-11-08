@@ -3,31 +3,24 @@
 
 #include <string>
 #include <vector>
+#include "encounter.h"
 using namespace std;
-
-struct Sighting {
-    string city;
-    string state;
-    string country;
-    string date;
-    string shape;
-    string description;
-};
 
 struct SplayNode {
     string state;
-    vector<string> sightings;
+    vector<City> cities;
 
     SplayNode* left;
     SplayNode* right;
     SplayNode* parent;
 
-    SplayNode(string stateName, string sighting);
+    SplayNode(string stateName, const City& city);
 };
 
 class SplayTree {
 private:
     SplayNode* root;
+    int totalSightings = 0;
     void rotateLeft(SplayNode* node);
     void rotateRight(SplayNode* node);
     void splay(SplayNode* node);
@@ -36,10 +29,16 @@ public:
     SplayTree();
     ~SplayTree();
 
-    void insert(string state, string sighting);
-    SplayNode* search (const string& state);
-    vector<string> parseLine(const string& line);
-    bool loadCSV(const string& fileName);
+    SplayTree(const SplayTree&) = delete;
+    SplayTree& operator=(const SplayTree&) = delete;
+
+    void clear();
+    void insert(const City& city);
+
+    SplayNode* searchStates(const string& state);
+    City* searchCities(const string& city, const string& state);
+    bool reportSighting(const string& city, const string& state, const Encounter& encounter);
+    int total() const;
 };
 
 #endif //COP3530_PROJECT_2_SPLAY_H

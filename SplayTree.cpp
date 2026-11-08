@@ -3,9 +3,9 @@
 #include <fstream>
 #include <iostream>
 
-SplayNode::SplayNode(string stateName, string sighting) {
+SplayNode::SplayNode(string stateName, const City& city) {
     state = stateName;
-    sightings.push_back(sighting);
+    cities.push_back(city);
     left = nullptr;
     right = nullptr;
     parent = nullptr;
@@ -16,6 +16,10 @@ SplayTree::SplayTree() {
 }
 
 SplayTree::~SplayTree() {
+    clear();
+}
+
+void SplayTree::clear() {
     stack<SplayNode*> nodes;
     if (root != nullptr)
         nodes.push(root);
@@ -28,6 +32,8 @@ SplayTree::~SplayTree() {
             nodes.push(current->right);
         delete current;
     }
+    root = nullptr;
+    totalSightings = 0;
 }
 
 void SplayTree::rotateLeft(SplayNode* node) {
@@ -92,38 +98,43 @@ void SplayTree::splay(SplayNode* node) {
     }
 }
 
-void SplayTree::insert(string state, string sighting) {
+void SplayTree::insert(const City& city) {
+    totalSightings += (int)city.encounters.size();
     if (root == nullptr) {
-        root = new SplayNode(state, sighting);
+        root = new SplayNode(city.state, city);
         return;
     }
     SplayNode* current = root;
     SplayNode* parent = nullptr;
-
     while (current != nullptr) {
         parent = current;
-        if (state == current->state) {
-            current->sightings.push_back(sighting);
+        if (city.state == current->state) {
+            for (City& existing : current->cities) {
+                if (existing.name == city.name) {
+                    existing.encounters.insert(existing.encounters.end(), city.encounters.begin(), city.encounters.end());
+                    splay(current);
+                    return;
+                }
+            }
+            current->cities.push_back(city);
             splay(current);
             return;
-        } else if (state < current->state) {
+        } else if (city.state < current->state) {
             current = current->left;
         } else {
             current = current->right;
         }
     }
-
-    SplayNode* newNode = new SplayNode(state, sighting);
+    SplayNode* newNode = new SplayNode(city.state, city);
     newNode->parent = parent;
-    if (state < parent->state) {
+    if (city.state < parent->state)
         parent->left = newNode;
-    } else {
+    else
         parent->right = newNode;
-    }
     splay(newNode);
 }
 
-SplayNode* SplayTree::search(const string& state) {
+SplayNode* SplayTree::searchStates(const string& state) {
     SplayNode* current = root;
     SplayNode* last = nullptr;
 
@@ -144,59 +155,32 @@ SplayNode* SplayTree::search(const string& state) {
     return nullptr;
 }
 
-vector<string> SplayTree::parseLine(const string& line) {
-    vector<string> fields;
-    string field;
-    bool insideQuotes = false;
-
-    for (int i = 0; i < line.size(); i++) {
-        char c = line[i];
-        if (c == '\"') {
-            if (insideQuotes && i+1 < line.size() && line[i+1] == '\"') {
-                field += '\"';
-                i++;
-            } else {
-                insideQuotes = !insideQuotes;
-            }
-        } else if (c == ',' && !insideQuotes) {
-            fields.push_back(field);
-            field = "";
-        } else {
-            field += c;
-        }
+City* SplayTree::searchCities(const string& city, const string& state) {
+    SplayNode* node = searchStates(state);
+    if (node == nullptr)
+        return nullptr;
+    for (City& c : node->cities) {
+        if (c.name == city)
+            return &c;
     }
-    fields.push_back(field);
-    return fields;
+    return nullptr;
 }
 
-bool SplayTree::loadCSV(const string& fileName) {
-    ifstream file(fileName);
-    if (!file.is_open()) {
-        cout << "Couldn't open file: " << fileName << endl;
-        return false;
+bool SplayTree::reportSighting(const string& city, const string& state, const Encounter& encounter) {
+    City* existing = searchCities(city, state);
+    if (existing != nullptr) {
+        existing->encounters.push_back(encounter);
+        totalSightings++;
+        return true;
     }
-    string line;
-    getline(file, line);
-    int c = 0;
-    while (getline(file, line)) {
-        if (line.empty())
-            continue;
-        vector<string> fields = parseLine(line);
-        if (fields.size() != 14)
-            continue;
-        string state = fields[2];
-        if (state.empty())
-            continue;
-        insert(state, line);
-        c++;
-    }
-    cout << "Loaded " << c << " UFO sightings into the Splay Tree." << endl;
-    return !file.bad();
+    City newCity;
+    newCity.name = city;
+    newCity.state = state;
+    newCity.encounters.push_back(encounter);
+    insert(newCity);
+    return false;
 }
 
-
-
-
-
-
-
+int SplayTree::total() const {
+    return totalSightings;
+}
