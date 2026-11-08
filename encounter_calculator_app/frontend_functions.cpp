@@ -37,6 +37,7 @@ void Frontend_functions::init_cities(){
 }
 
 void Frontend_functions::getData(){
+    textCounter = 0;        //reset textcounter to avoid bugs in reading
     vector<string> received_splaydata = {"abc","peppy"};    //will call backend functions
     //vector<string> received_mindata = {"cba", "peepy"};     //instead of direct declaration when possible
     QueryResult received_mindata = backend.queryHeap(curr_city, selected_state);
