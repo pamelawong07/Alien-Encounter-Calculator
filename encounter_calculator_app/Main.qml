@@ -32,16 +32,36 @@ ApplicationWindow {
             id: rectangle1
             color: "white"
             Layout.fillHeight: true
-            //Layout.fillWidth: true
             Layout.preferredWidth: 600
             Layout.alignment: Qt.AlignLeft
+            Text{
+                id: selected_state_txt
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.margins: 10
+                font.pointSize: 12
+                font.bold: true
+                text: "Selected state: " + fe_functions.getState();
+            }
             Image{
-                id: map
+                id: mapimage
                 anchors.fill: parent
-                //picture sourced from https://inkpx.com/templates/6mde/printable-us-map-state-outline-with-names
-                source: "qrc:/img/images/United-States-Country-OutlineONLY.png"
-                //source: "qrc:/img/images/test_stockimg.jpg"
+                source: "qrc:/img/images/United-States-Country-colored.png"
                 fillMode: Image.PreserveAspectFit
+            }
+            MouseArea{
+                width: mapimage.paintedWidth
+                height: mapimage.paintedHeight
+                anchors.centerIn: mapimage
+                onClicked: (mouse) => {
+                    var clicked_x = mouse.x/mapimage.paintedWidth
+                    var clicked_y = mouse.y/mapimage.paintedHeight
+                    var imgpx_x = Math.floor(clicked_x * 2000)
+                    var imgpx_y = Math.floor(clicked_y * 1628)
+                    fe_functions.processClick(imgpx_x, imgpx_y)
+                    selected_state_txt.text = "Selected state: " + fe_functions.getState()
+                    report_statetxt.text = "State: " + fe_functions.getState()
+                }
             }
         }
 
@@ -81,6 +101,7 @@ ApplicationWindow {
                         implicitHeight: 36
                         radius: 8
                     }
+                    onClicked: report_window.show()
                 }
                 Button{
                     id: query_city
@@ -94,6 +115,7 @@ ApplicationWindow {
                         radius: 8
                     }
                     onClicked: {
+                        fe_functions.setCurr_city(city_picker.currentText);
                         fe_functions.getData();
                         datatext.text = fe_functions.getText();
                         timetxt.text = fe_functions.getTime();
@@ -102,10 +124,20 @@ ApplicationWindow {
                 ComboBox{
                     id: city_picker
                     Layout.alignment: Qt.AlignHCenter
-                    model: ListModel{
-                        id: city_list
-                        ListElement{text:"Select a state to choose a city..."}
+                    model: fe_functions.cities_select
+                    width: 220
+                    popup: Popup{
+                        width: 220
+                        height: 250
+                        y: city_picker.height
+                        padding: 2
+                        contentItem: ListView {
+                            clip: true
+                            model: city_picker.popup.visible ? city_picker.delegateModel : null
+                            ScrollBar.vertical: ScrollBar {active: true }
+                        }
                     }
+
                     background: Rectangle{
                         color: "white"
                         implicitWidth: 220
@@ -180,9 +212,6 @@ ApplicationWindow {
                         color: lightgray
                         id: time_box
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-                        MouseArea{
-                            anchors.fill: parent
-                        }
                         Text{
                             id: timetxt
                             leftPadding: 5
@@ -262,14 +291,118 @@ ApplicationWindow {
                       "\nApp icon: \ncosmin4000/Getty Images/Alien\n" +
                       "\nUS Map clipart/buttons: \nGisGeography (https://gisgeography.com/state-outlines-blank-maps-united-states/)\n" +
                       "\nCity dataset (population, location data):\nSimpleMaps (https://simplemaps.com/data/us-cities)\n" +
-                      "\nAlien encounter dataset: CORGIS (https://corgis-edu.github.io/corgis/json/ufo_sightings/)\n" +
-                      "\n\nMade by: \n" +
+                      "\nAlien encounter dataset:\nCORGIS (https://corgis-edu.github.io/corgis/json/ufo_sightings/)\n" +
+                      "\n\Built by: \n" +
                       "Pamela Wong (Frontend)\n" +
-                      "Miaohan Lin (Data management, backend (minheap))\n" +
+                      "Miaohan Lin (Data processing, backend (minheap))\n" +
                       "Orion Borrell-Jones (Backend (splay tree))"
             selectByMouse: true
             readOnly: true
             wrapMode: Text.Wrap
+        }
+    }
+
+    Window{
+        id: report_window
+        title: "Submit New Sighting"
+        visible: false
+        width: 400
+        height: 400
+        minimumWidth: 400
+        minimumHeight: 400
+        maximumWidth: 400
+        maximumHeight: 400
+        ColumnLayout{
+            anchors.fill: parent
+            anchors.leftMargin: 5
+            spacing: 2
+            Text{
+                text: "Report a sighting by filling out the information below!\n"
+                font.pointSize: 12}
+            Text{
+                id: report_statetxt
+                text: "State: " + fe_functions.getState()
+                font.pointSize: 12}
+            Row{
+                Text{
+                    text: "City: "
+                    font.pointSize: 12}
+                ComboBox{
+                    id: report_citybox
+                    model: fe_functions.cities_select
+                    width: 220
+                    popup: Popup{
+                        width: 220
+                        height: 250
+                        padding: 2
+                        contentItem: ListView {
+                            clip: true
+                            model: report_citybox.popup.visible ? report_citybox.delegateModel : null
+                            ScrollBar.vertical: ScrollBar {active: true }
+                        }
+                    }
+
+                    background: Rectangle{
+                        color: "white"
+                        implicitWidth: 220
+                    }
+                }
+            }
+            Text{
+                text: "Description: "
+                font.pointSize: 12
+                bottomPadding: 0
+            }
+            TextArea{
+                Layout.fillWidth: true
+                Layout.preferredHeight: 100
+                Text{
+                    id: report_description
+                    leftPadding: 5
+                    font.pointSize: 12
+                    //text: "Explain your sighting..."
+                }
+                readOnly: false
+                enabled: true
+                selectByMouse: true
+                wrapMode: Text.Wrap
+                background: Rectangle{
+                    border.color: "black"
+                }
+            }
+            Button{
+                id: submit_report
+                text: "Submit"
+                font.pointSize: 15
+                font.bold: true
+                background: Rectangle{
+                    implicitWidth: 150
+                    implicitHeight: 36
+                    radius: 8
+                    color: aliengreen
+                }
+                onClicked: {
+                    fe_functions.submitReport(report_citybox.currentText, TextArea.text)
+                    report_window.close()
+                    submitted_window.show()
+                }
+            }
+        }
+    }
+    Window{
+        id: submitted_window
+        title: "Submitted!"
+        visible: false
+        width: 250
+        height: 50
+        minimumWidth: 250
+        minimumHeight: 50
+        maximumWidth: 250
+        maximumHeight: 50
+        Text{
+            font.pointSize: 12
+            text: "Sighting submitted!"
+            anchors.centerIn: parent
         }
     }
 }

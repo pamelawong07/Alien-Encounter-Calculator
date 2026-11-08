@@ -1,108 +1,59 @@
 <RCC>
     <qresource prefix="/img">
         <file>images/alabama.png</file>
-        <file>images/alabama_y.png</file>
         <file>images/alaska.png</file>
-        <file>images/alaska_y.png</file>
         <file>images/arizona.png</file>
-        <file>images/arizona_y.png</file>
         <file>images/arkansas.png</file>
-        <file>images/arkansas_y.png</file>
         <file>images/california.png</file>
-        <file>images/california_y.png</file>
         <file>images/colorado.png</file>
-        <file>images/colorado_y.png</file>
         <file>images/connecticut.png</file>
-        <file>images/connecticut_y.png</file>
         <file>images/delaware.png</file>
-        <file>images/delaware_y.png</file>
         <file>images/florida.png</file>
-        <file>images/florida_y.png</file>
         <file>images/georgia.png</file>
-        <file>images/georgia_y.png</file>
         <file>images/hawaii.png</file>
-        <file>images/hawaii_y.png</file>
         <file>images/idaho.png</file>
-        <file>images/idaho_y.png</file>
         <file>images/illinois.png</file>
-        <file>images/illinois_y.png</file>
         <file>images/indiana.png</file>
-        <file>images/indiana_y.png</file>
         <file>images/iowa.png</file>
-        <file>images/iowa_y.png</file>
         <file>images/kansas.png</file>
-        <file>images/kansas_y.png</file>
         <file>images/kentucky.png</file>
-        <file>images/kentucky_y.png</file>
         <file>images/louisiana.png</file>
-        <file>images/louisiana_y.png</file>
         <file>images/maine.png</file>
-        <file>images/maine_y.png</file>
         <file>images/maryland.png</file>
-        <file>images/maryland_y.png</file>
         <file>images/massachusetts.png</file>
-        <file>images/massachusetts_y.png</file>
         <file>images/michigan.png</file>
-        <file>images/michigan_y.png</file>
         <file>images/minnesota.png</file>
-        <file>images/minnesota_y.png</file>
         <file>images/mississippi.png</file>
-        <file>images/mississippi_y.png</file>
         <file>images/missouri.png</file>
-        <file>images/missouri_y.png</file>
         <file>images/montana.png</file>
-        <file>images/montana_y.png</file>
         <file>images/nebraska.png</file>
-        <file>images/nebraska_y.png</file>
         <file>images/nevada.png</file>
-        <file>images/nevada_y.png</file>
         <file>images/new_hampshire.png</file>
-        <file>images/new_hampshire_y.png</file>
         <file>images/new_jersey.png</file>
-        <file>images/new_jersey_y.png</file>
         <file>images/new_mexico.png</file>
-        <file>images/new_mexico_y.png</file>
         <file>images/newyork.png</file>
-        <file>images/newyork_y.png</file>
         <file>images/north_carolina.png</file>
-        <file>images/north_carolina_y.png</file>
         <file>images/north_dakota.png</file>
-        <file>images/north_dakota_y.png</file>
         <file>images/ohio.png</file>
-        <file>images/ohio_y.png</file>
         <file>images/oklahoma.png</file>
-        <file>images/oklahoma_y.png</file>
         <file>images/oregon.png</file>
-        <file>images/oregon_y.png</file>
         <file>images/pennsylvania.png</file>
-        <file>images/pennsylvania_y.png</file>
         <file>images/rhode_island.png</file>
-        <file>images/rhode_island_y.png</file>
         <file>images/south_carolina.png</file>
-        <file>images/south_carolina_y.png</file>
         <file>images/south_dakota.png</file>
-        <file>images/south_dakota_y.png</file>
         <file>images/tennessee.png</file>
-        <file>images/tennessee_y.png</file>
         <file>images/texas.png</file>
-        <file>images/texas_y.png</file>
         <file>images/United-States-Country-Outline.jpg</file>
         <file>images/United-States-Country-OutlineONLY.png</file>
         <file>images/utah.png</file>
-        <file>images/utah_y.png</file>
         <file>images/vermont.png</file>
-        <file>images/vermont_y.png</file>
         <file>images/virginia.png</file>
-        <file>images/virginia_y.png</file>
         <file>images/washington.png</file>
-        <file>images/washington_y.png</file>
         <file>images/west_virginia.png</file>
-        <file>images/west_virginia_y.png</file>
         <file>images/wisconsin.png</file>
-        <file>images/wisconsin_y.png</file>
         <file>images/wyoming.png</file>
-        <file>images/wyoming_y.png</file>
         <file>images/test_stockimg.jpg</file>
         <file>images/2195316-alien.jpg</file>
+        <file>images/United-States-Country-colored.png</file>
     </qresource>
 </RCC>

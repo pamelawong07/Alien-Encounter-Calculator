@@ -29,7 +29,12 @@ qt_add_qml_module(appencounter_calculator
     RESOURCES
         mapimages.qrc
     SOURCES
-    frontend_functions.h frontend_functions.cpp
+    frontend_functions.h
+    frontend_functions.cpp
+    copied_classes/encounter.h
+    copied_classes/SplayTree.h
+    copied_classes/SplayTree.cpp
+    copied_classes/minheap.h
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
