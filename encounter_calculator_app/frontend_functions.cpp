@@ -38,13 +38,14 @@ void Frontend_functions::init_cities(){
 
 void Frontend_functions::getData(){
     textCounter = 0;        //reset textcounter to avoid bugs in reading
-    vector<string> received_splaydata = {"abc","peppy"};    //will call backend functions
+    //vector<string> received_splaydata = {"abc","peppy"};    //will call backend functions
     //vector<string> received_mindata = {"cba", "peepy"};     //instead of direct declaration when possible
+    QueryResult received_splaydata = backend.querySplay(curr_city, selected_state);
     QueryResult received_mindata = backend.queryHeap(curr_city, selected_state);
 
-    splaydata = received_mindata.descriptions;
+    splaydata = received_splaydata.descriptions;
     mindata = received_mindata.descriptions;
-    splaytime = 0;
+    splaytime = float(received_splaydata.seconds);
     mintime = float(received_mindata.seconds);
     num_encounters = received_mindata.count;    //using minheap for data shared between both structures
     total_encounters = received_mindata.total;

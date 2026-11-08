@@ -5,7 +5,7 @@
 #pragma once
 #include "encounter.h"
 #include "minheap.h"
-//#include "SplayTree.h"
+#include "SplayTree.h"
 #include <cmath>
 #include <string>
 #include <vector>
@@ -48,7 +48,7 @@ private:
     using Clock = std::chrono::steady_clock;
 
     MinHeap heap;
-    //SplayTree splay;
+    SplayTree splay;
     std::string lastError;
     bool loaded = false;
     std::unordered_map<std::string, double> info; //has distance from
@@ -241,10 +241,10 @@ public:
             }
             double d = info[makeKey(k.first.first, k.first.second)];
             heap.insert(k.second.city, d);
-            //splay.insert(k.second.city, d);
+            splay.insert(k.second.city, d);
         }
         heap.insert(origin->second.city, 0.0);
-        //splay.insert(origin->second.city, d);
+        splay.insert(origin->second.city, 0.0);
         loaded = true;
         return true;
     }
@@ -281,6 +281,9 @@ public:
     }
 
     //splay tree version here
+    QueryResult querySplay(const std::string& city, const std::string& state){
+        return run(splay, city, state);
+    }
 
     //user submitted sighting
     bool report(const std::string& city, const std::string& state, const std::string& description){
@@ -301,7 +304,7 @@ public:
         e.year = tmv.tm_year + 1900;
         e.description = description;
         heap.reportSighting(city, state, it->second, e);
-        //splay.reportSighting(city, state, it->second e);
+        splay.reportSighting(city, state, it->second, e);
         return true;
     }
 

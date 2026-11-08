@@ -33,8 +33,8 @@ qt_add_qml_module(appencounter_calculator
     frontend_functions.h
     frontend_functions.cpp
     copied_classes/encounter.h
-    #copied_classes/SplayTree.h
-    #copied_classes/SplayTree.cpp
+    copied_classes/SplayTree.h
+    copied_classes/SplayTree.cpp
     copied_classes/minheap.h
     copied_classes/backend.h
 )
