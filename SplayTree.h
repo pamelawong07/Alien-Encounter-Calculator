@@ -7,14 +7,14 @@
 using namespace std;
 
 struct SplayNode {
-    string state;
+    double distance;
     vector<City> cities;
 
     SplayNode* left;
     SplayNode* right;
     SplayNode* parent;
 
-    SplayNode(string stateName, const City& city);
+    SplayNode(double distance, const City& city);
 };
 
 class SplayTree {
@@ -24,6 +24,7 @@ private:
     void rotateLeft(SplayNode* node);
     void rotateRight(SplayNode* node);
     void splay(SplayNode* node);
+    SplayNode* searchDistance(double distance);
 
 public:
     SplayTree();
@@ -33,11 +34,9 @@ public:
     SplayTree& operator=(const SplayTree&) = delete;
 
     void clear();
-    void insert(const City& city);
-
-    SplayNode* searchStates(const string& state);
-    City* searchCities(const string& city, const string& state);
-    bool reportSighting(const string& city, const string& state, const Encounter& encounter);
+    void insert(const City& city, double distance);
+    City* search(const string& name, const string& state, double distance);
+    bool reportSighting(const string& name, const string& state, double distance, const Encounter& encounter);
     int total() const;
 };
 

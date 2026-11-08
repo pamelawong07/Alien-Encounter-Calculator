@@ -3,8 +3,8 @@
 #include <fstream>
 #include <iostream>
 
-SplayNode::SplayNode(string stateName, const City& city) {
-    state = stateName;
+SplayNode::SplayNode(double distance, const City& city) {
+    this->distance = distance;
     cities.push_back(city);
     left = nullptr;
     right = nullptr;
@@ -98,19 +98,19 @@ void SplayTree::splay(SplayNode* node) {
     }
 }
 
-void SplayTree::insert(const City& city) {
+void SplayTree::insert(const City& city, double distance) {
     totalSightings += (int)city.encounters.size();
     if (root == nullptr) {
-        root = new SplayNode(city.state, city);
+        root = new SplayNode(distance, city);
         return;
     }
     SplayNode* current = root;
     SplayNode* parent = nullptr;
     while (current != nullptr) {
         parent = current;
-        if (city.state == current->state) {
+        if (distance == current->distance) {
             for (City& existing : current->cities) {
-                if (existing.name == city.name) {
+                if (existing.name == city.name && existing.state == city.state) {
                     existing.encounters.insert(existing.encounters.end(), city.encounters.begin(), city.encounters.end());
                     splay(current);
                     return;
@@ -119,31 +119,31 @@ void SplayTree::insert(const City& city) {
             current->cities.push_back(city);
             splay(current);
             return;
-        } else if (city.state < current->state) {
+        } else if (distance < current->distance) {
             current = current->left;
         } else {
             current = current->right;
         }
     }
-    SplayNode* newNode = new SplayNode(city.state, city);
+    SplayNode* newNode = new SplayNode(distance, city);
     newNode->parent = parent;
-    if (city.state < parent->state)
+    if (distance < parent->distance)
         parent->left = newNode;
     else
         parent->right = newNode;
     splay(newNode);
 }
 
-SplayNode* SplayTree::searchStates(const string& state) {
+SplayNode* SplayTree::searchDistance(double distance) {
     SplayNode* current = root;
     SplayNode* last = nullptr;
 
     while (current != nullptr) {
         last = current;
-        if (state == current->state) {
+        if (distance == current->distance) {
             splay(current);
             return current;
-        } else if (state < current->state) {
+        } else if (distance < current->distance) {
             current = current->left;
         } else {
             current = current->right;
@@ -155,29 +155,30 @@ SplayNode* SplayTree::searchStates(const string& state) {
     return nullptr;
 }
 
-City* SplayTree::searchCities(const string& city, const string& state) {
-    SplayNode* node = searchStates(state);
+City* SplayTree::search(const string& name, const string& state, double distance) {
+    SplayNode* node = searchDistance(distance);
     if (node == nullptr)
         return nullptr;
-    for (City& c : node->cities) {
-        if (c.name == city)
-            return &c;
+    for (City& city : node->cities) {
+        if (city.name == name && city.state == state) {
+            return &city;
+        }
     }
     return nullptr;
 }
 
-bool SplayTree::reportSighting(const string& city, const string& state, const Encounter& encounter) {
-    City* existing = searchCities(city, state);
+bool SplayTree::reportSighting(const string& name, const string& state, double distance, const Encounter& encounter) {
+    City* existing = search(name, state, distance);
     if (existing != nullptr) {
         existing->encounters.push_back(encounter);
         totalSightings++;
         return true;
     }
     City newCity;
-    newCity.name = city;
+    newCity.name = name;
     newCity.state = state;
     newCity.encounters.push_back(encounter);
-    insert(newCity);
+    insert(newCity, distance);
     return false;
 }
 
