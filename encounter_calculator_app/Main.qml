@@ -237,7 +237,7 @@ ApplicationWindow {
                             leftPadding: 5
                             topPadding: 5
                             font.pointSize: 12
-                            text: fe_functions.getText()
+                            text: "Select a city and click 'calculate probability' to review all alien encounters!"
                             wrapMode: Text.WordWrap
                         }
                     }
@@ -294,7 +294,7 @@ ApplicationWindow {
                       "\nAlien encounter dataset:\nCORGIS (https://corgis-edu.github.io/corgis/json/ufo_sightings/)\n" +
                       "\n\Built by: \n" +
                       "Pamela Wong (Frontend)\n" +
-                      "Miaohan Lin (Data processing, backend (minheap))\n" +
+                      "Miaohan Lin (Data processing, backend (minheap, backend.h))\n" +
                       "Orion Borrell-Jones (Backend (splay tree))"
             selectByMouse: true
             readOnly: true
@@ -354,6 +354,7 @@ ApplicationWindow {
                 bottomPadding: 0
             }
             TextArea{
+                id: report_description_box
                 Layout.fillWidth: true
                 Layout.preferredHeight: 100
                 Text{
@@ -382,7 +383,7 @@ ApplicationWindow {
                     color: aliengreen
                 }
                 onClicked: {
-                    fe_functions.submitReport(report_citybox.currentText, TextArea.text)
+                    fe_functions.submitReport(report_citybox.currentText, report_description_box.text)
                     report_window.close()
                     submitted_window.show()
                 }

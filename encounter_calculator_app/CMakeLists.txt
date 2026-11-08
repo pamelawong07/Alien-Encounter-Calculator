@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(encounter_calculator VERSION 0.1 LANGUAGES CXX)
 
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -32,10 +33,14 @@ qt_add_qml_module(appencounter_calculator
     frontend_functions.h
     frontend_functions.cpp
     copied_classes/encounter.h
-    copied_classes/SplayTree.h
-    copied_classes/SplayTree.cpp
+    #copied_classes/SplayTree.h
+    #copied_classes/SplayTree.cpp
     copied_classes/minheap.h
+    copied_classes/backend.h
 )
+
+target_compile_definitions(appencounter_calculator PRIVATE UFO_CSV_PATH="${CMAKE_CURRENT_SOURCE_DIR}/copied_classes/ufo_clean.csv")
+
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

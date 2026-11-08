@@ -4,11 +4,12 @@
 Frontend_functions::Frontend_functions(QObject *parent) : QObject(parent) {
     // splaydata = {"cba", "peepy"};
     // mindata = {"abc","peppy"};
-    // splaytime = 0;
-    // mintime = 3;
-    // num_encounters = 100;
-    total_encounters = 65115;
-
+    splaytime = 0;
+    mintime = 0;
+    if (!backend.load(UFO_CSV_PATH))
+        qWarning() << "Backend load failed:" << backend.error().c_str();
+    total_encounters = backend.totalSightings();
+    num_encounters = 0;
     textCounter = 0;
     splay_min = 0;
     curr_city = "gainesville";
@@ -22,38 +23,9 @@ QStringList Frontend_functions::cities_select() const {
 }
 
 void Frontend_functions::init_cities(){
-    //retrieve reported cities from csv
-    ifstream cities_csv("../../copied_classes/ufo_clean.csv");
-    string curr_city;
-    string curr_state;
-    string csv_line;
-    if (!cities_csv.is_open()) {
-        cout << "bad" << endl;
-    }
-    getline(cities_csv, csv_line);
-    while (getline(cities_csv, csv_line)){
-        stringstream s(csv_line);
-        //cout << "a" << endl;
-        getline(s, curr_city, ',');
-        getline(s, curr_city, ',');
-        getline(s, curr_state, ',');
-
-        //remove quotations
-        curr_city = curr_city.substr(1, curr_city.size()-2);
-        curr_state = curr_state.substr(1, curr_state.size()-2);
-
-        //scrub parentheses (and leading space) from city names if they exist
-        int find_parentheses = curr_city.find('(');
-        if (find_parentheses != string::npos){
-            curr_city = curr_city.substr(0, find_parentheses-1);
-        }
-
-        if (state_cities.find(curr_state) != state_cities.end()){
-            state_cities[curr_state].insert(curr_city);
-        }
-        else{
-            state_cities[curr_state] = {curr_city};
-        }
+    state_cities.clear();
+    for (const auto& city_state : backend.cityMap()){
+        state_cities[city_state.first] = city_state.second;
     }
 
     //for testing purposes
@@ -66,18 +38,23 @@ void Frontend_functions::init_cities(){
 
 void Frontend_functions::getData(){
     vector<string> received_splaydata = {"abc","peppy"};    //will call backend functions
-    vector<string> received_mindata = {"cba", "peepy"};     //instead of direct declaration when possible
+    //vector<string> received_mindata = {"cba", "peepy"};     //instead of direct declaration when possible
+    QueryResult received_mindata = backend.queryHeap(curr_city, selected_state);
+
     splaydata = received_splaydata;
-    mindata = received_mindata;
+    mindata = received_mindata.descriptions;
     splaytime = 0;
-    mintime = 3;
+    mintime = float(received_mindata.seconds);
+    num_encounters = received_mindata.count;    //using minheap for data shared between both structures
+    total_encounters = received_mindata.total;
+    probability = float(received_mindata.probability);
+
 }
 
 QString Frontend_functions::getText(){
     QString curr_text;
     string curr_city_cap = static_cast<char>(toupper(curr_city[0])) + curr_city.substr(1, curr_city.size()-1);
     if (textCounter == 0){
-        float probability = 0.01;       //will get probability from backend function
         curr_text = QString::fromStdString("Your probability of encountering an alien in " + curr_city_cap + " is " + to_string(probability) + "%!");
         curr_text += QString::fromStdString("\n\nThere have been " + to_string(num_encounters) + " reported alien encounters in " + curr_city_cap + " out of " + to_string(total_encounters) +  " in the country.");
         curr_text += QString::fromStdString("\n\nClick the arrows below to read reported encounters, if any.");
@@ -92,9 +69,9 @@ QString Frontend_functions::getText(){
 QString Frontend_functions::getTime(){
     QString curr_text;
     if (!splay_min)
-        curr_text = QString::fromStdString("TIME: " + to_string(splaytime) + " secs");
+        curr_text = QString::fromStdString("TIME: ") + QString::number(splaytime * 1e6, 'f', 1) + QString::fromStdString(" us");
     else
-        curr_text = QString::fromStdString("TIME: " + to_string(mintime) + " secs");
+        curr_text = QString::fromStdString("TIME: ") + QString::number(mintime * 1e6, 'f', 1) + QString::fromStdString(" us");
     return curr_text;
 }
 
@@ -108,7 +85,7 @@ void Frontend_functions::toggleCounter(bool direction){
             textCounter--;
     }
     else{
-        if (textCounter < splaydata.size())
+        if (textCounter < mindata.size())   //right toggle
             textCounter++;
     }
 }
@@ -242,5 +219,6 @@ void Frontend_functions::retrieveOptions(string state){
 }
 
 void Frontend_functions::submitReport(QString city, QString desc){
-
+    if (backend.report(city.toStdString(), selected_state, desc.toStdString()))
+        total_encounters = backend.totalSightings();
 }

@@ -3,12 +3,15 @@
 
 #include <QObject>
 #include <QtQml>
+#include <QDebug>
 #include <string>
 #include <vector>
 #include <map>
 #include <fstream>
 #include <iostream>
 #include "copied_classes/encounter.h"
+#include "copied_classes/backend.h"
+
 using namespace std;
 
 class Frontend_functions : public QObject
@@ -16,12 +19,14 @@ class Frontend_functions : public QObject
     Q_OBJECT
     Q_PROPERTY(QStringList cities_select READ cities_select NOTIFY toggle_city_select)
     QML_ELEMENT
+    Backend backend;
     int textCounter;
     bool splay_min;     //0: splay 1: minheap
     vector<string> splaydata;
     vector<string> mindata;
     float mintime;
     float splaytime;
+    float probability;
     string curr_city;
     string selected_state;
     int num_encounters;
