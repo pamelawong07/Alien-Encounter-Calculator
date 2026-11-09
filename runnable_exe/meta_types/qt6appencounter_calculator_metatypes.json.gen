@@ -1,0 +1,158 @@
+[
+    {
+        "classes": [
+            {
+                "classInfos": [
+                    {
+                        "name": "QML.Element",
+                        "value": "auto"
+                    }
+                ],
+                "className": "Frontend_functions",
+                "lineNumber": 17,
+                "methods": [
+                    {
+                        "access": "public",
+                        "index": 1,
+                        "lineNumber": 43,
+                        "name": "getData",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 2,
+                        "lineNumber": 45,
+                        "name": "getText",
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "index": 3,
+                        "lineNumber": 47,
+                        "name": "getTime",
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "index": 4,
+                        "lineNumber": 48,
+                        "name": "getState",
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "direction",
+                                "type": "bool"
+                            }
+                        ],
+                        "index": 5,
+                        "lineNumber": 49,
+                        "name": "toggleCounter",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 6,
+                        "lineNumber": 50,
+                        "name": "toggleSplay",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 7,
+                        "lineNumber": 51,
+                        "name": "toggleMin",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "x",
+                                "type": "int"
+                            },
+                            {
+                                "name": "y",
+                                "type": "int"
+                            }
+                        ],
+                        "index": 8,
+                        "lineNumber": 52,
+                        "name": "processClick",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "city",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 9,
+                        "lineNumber": 53,
+                        "name": "setCurr_city",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "city",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "desc",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 10,
+                        "lineNumber": 54,
+                        "name": "submitReport",
+                        "returnType": "void"
+                    }
+                ],
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "lineNumber": 20,
+                        "name": "cities_select",
+                        "notify": "toggle_city_select",
+                        "override": false,
+                        "read": "cities_select",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QStringList",
+                        "user": false,
+                        "virtual": false
+                    }
+                ],
+                "qualifiedClassName": "Frontend_functions",
+                "signals": [
+                    {
+                        "access": "public",
+                        "index": 0,
+                        "lineNumber": 59,
+                        "name": "toggle_city_select",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "frontend_functions.h",
+        "outputRevision": 69
+    }
+]

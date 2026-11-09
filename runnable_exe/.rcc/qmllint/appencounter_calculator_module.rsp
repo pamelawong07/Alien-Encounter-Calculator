@@ -1,0 +1,16 @@
+-I
+C:/Users/Pamela/Documents/dsa/encounter_calculator/encounter_calculator_app/build/Desktop_Qt_6_12_0_MinGW_64_bit_Release
+-I
+C:/Users/Pamela/Documents/dsa/encounter_calculator/encounter_calculator_app/build/Desktop_Qt_6_12_0_MinGW_64_bit_Release/encounter_calculator
+-I
+C:/Users/Pamela/Documents/dsa/encounter_calculator/encounter_calculator_app/build/Desktop_Qt_6_12_0_MinGW_64_bit_Release
+-I
+C:/Qt/6.12.0/mingw_64/qml
+--resource
+C:/Users/Pamela/Documents/dsa/encounter_calculator/encounter_calculator_app/build/Desktop_Qt_6_12_0_MinGW_64_bit_Release/.qt/rcc/qmake_encounter_calculator.qrc
+--resource
+C:/Users/Pamela/Documents/dsa/encounter_calculator/encounter_calculator_app/build/Desktop_Qt_6_12_0_MinGW_64_bit_Release/.qt/rcc/appencounter_calculator_raw_qml_0.qrc
+--resource
+C:/Users/Pamela/Documents/dsa/encounter_calculator/encounter_calculator_app/build/Desktop_Qt_6_12_0_MinGW_64_bit_Release/.qt/rcc/appencounter_calculator_raw_res_0.qrc
+--module
+encounter_calculator

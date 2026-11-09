@@ -1,0 +1,241 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-778abebd8109ccaa14c1.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19,
+						20
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "encounter_calculator",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19,
+						20
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "all_aotstats::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_aotstats-Release-2dc79dd249bc780fc425.json",
+					"name" : "all_aotstats",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint-Release-ff0dedcef0aa166dfd32.json",
+					"name" : "all_qmllint",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint_json-Release-cd641f1ce8a4d6ab672e.json",
+					"name" : "all_qmllint_json",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint_module::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint_module-Release-3b80204d08ef4b785ec3.json",
+					"name" : "all_qmllint_module",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmltyperegistrations::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmltyperegistrations-Release-7758dc02a1045bf43fcc.json",
+					"name" : "all_qmltyperegistrations",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appencounter_calculator::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appencounter_calculator-Release-0e4545be9e3b847a7c0b.json",
+					"name" : "appencounter_calculator",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appencounter_calculator_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appencounter_calculator_autogen-Release-416d3ff8154273cc3b08.json",
+					"name" : "appencounter_calculator_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appencounter_calculator_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appencounter_calculator_autogen_timestamp_deps-Release-33f0901513b36f188994.json",
+					"name" : "appencounter_calculator_autogen_timestamp_deps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appencounter_calculator_copy_qml::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appencounter_calculator_copy_qml-Release-ed481b0675aa627778ed.json",
+					"name" : "appencounter_calculator_copy_qml",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appencounter_calculator_copy_res::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appencounter_calculator_copy_res-Release-6b7a2e7e86c6378ec523.json",
+					"name" : "appencounter_calculator_copy_res",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appencounter_calculator_qmlimportscan::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appencounter_calculator_qmlimportscan-Release-aecbcbf7a363b7b88504.json",
+					"name" : "appencounter_calculator_qmlimportscan",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appencounter_calculator_qmllint::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appencounter_calculator_qmllint-Release-0546bd4b2c96226b3b1d.json",
+					"name" : "appencounter_calculator_qmllint",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appencounter_calculator_qmllint_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appencounter_calculator_qmllint_json-Release-67cc0ad6bac20034b588.json",
+					"name" : "appencounter_calculator_qmllint_json",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appencounter_calculator_qmllint_module::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appencounter_calculator_qmllint_module-Release-282db82509263e7c8d5d.json",
+					"name" : "appencounter_calculator_qmllint_module",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appencounter_calculator_qmlpreview::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appencounter_calculator_qmlpreview-Release-d62500a55c0c0f98944e.json",
+					"name" : "appencounter_calculator_qmlpreview",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appencounter_calculator_qmltyperegistration::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appencounter_calculator_qmltyperegistration-Release-80780df9d703aacc3d38.json",
+					"name" : "appencounter_calculator_qmltyperegistration",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "clean_qml_context_properties::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-clean_qml_context_properties-Release-6c44910f35e90aa93626.json",
+					"name" : "clean_qml_context_properties",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "dump_qml_context_properties::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-dump_qml_context_properties-Release-4658ef241ec2bfb0c2a2.json",
+					"name" : "dump_qml_context_properties",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "generate_finalqtconf_appencounter_calculator::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-generate_finalqtconf_appencounter_calculator-Release-24b6945b273bfc04d4ac.json",
+					"name" : "generate_finalqtconf_appencounter_calculator",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "generate_qmlls_build_ini_file::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-generate_qmlls_build_ini_file-Release-97ad4f670612514d8169.json",
+					"name" : "generate_qmlls_build_ini_file",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "module_appencounter_calculator_aotstats_target::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-module_appencounter_calculator_aotstats_target-Release-7ed7a5a737eccbf32357.json",
+					"name" : "module_appencounter_calculator_aotstats_target",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/Pamela/Documents/dsa/encounter_calculator/encounter_calculator_app/build/Desktop_Qt_6_12_0_MinGW_64_bit_Release",
+		"source" : "C:/Users/Pamela/Documents/dsa/encounter_calculator/encounter_calculator_app"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

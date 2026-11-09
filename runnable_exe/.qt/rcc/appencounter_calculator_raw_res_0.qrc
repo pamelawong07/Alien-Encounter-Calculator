@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/encounter_calculator/">
+    <file alias="mapimages.qrc">C:/Users/Pamela/Documents/dsa/encounter_calculator/encounter_calculator_app/mapimages.qrc</file>
+  </qresource>
+</RCC>
+

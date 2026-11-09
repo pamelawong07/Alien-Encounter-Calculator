@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/encounter_calculator/">
+    <file alias="Main.qml">C:/Users/Pamela/Documents/dsa/encounter_calculator/encounter_calculator_app/Main.qml</file>
+  </qresource>
+</RCC>
+

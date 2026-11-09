@@ -1,0 +1,6 @@
+module encounter_calculator
+typeinfo appencounter_calculator.qmltypes
+prefer :/qt/qml/encounter_calculator/
+Main 254.0 Main.qml
+depends QtQuick
+
